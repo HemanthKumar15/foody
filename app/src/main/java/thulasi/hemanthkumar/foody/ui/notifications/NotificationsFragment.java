@@ -1,12 +1,15 @@
 package thulasi.hemanthkumar.foody.ui.notifications;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import thulasi.hemanthkumar.foody.AddressActivity;
+import thulasi.hemanthkumar.foody.ChooseAddressActivity;
 import thulasi.hemanthkumar.foody.adapter.Cart;
 import thulasi.hemanthkumar.foody.data.CartHandler;
 import thulasi.hemanthkumar.foody.databinding.FragmentNotificationsBinding;
@@ -40,6 +45,7 @@ public class NotificationsFragment extends Fragment {
     private ArrayAdapter<String> arrayAdapter;
     private Integer amount;
     public static TextView tamount;
+    private Button proceed;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class NotificationsFragment extends Fragment {
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        proceed = binding.proceed;
 
         final TextView textView = binding.textNotifications;
         cartView = binding.cartrecycler;
@@ -107,7 +114,25 @@ public class NotificationsFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+
+        proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckData();
+            }
+        });
+
+
         return root;
+    }
+
+    private void CheckData() {
+        SharedPreferences pref = getActivity().getSharedPreferences("save",Context.MODE_PRIVATE);
+        Intent go = new Intent(getContext(),ChooseAddressActivity.class);
+        go.putExtra("amount",amount);
+        startActivity(go);
+
     }
 
     public static void UpdateAmount(Context context) {

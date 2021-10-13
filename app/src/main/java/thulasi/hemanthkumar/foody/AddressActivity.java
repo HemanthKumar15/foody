@@ -37,7 +37,8 @@ public class AddressActivity extends AppCompatActivity {
     private Button skip,add_btn;
     private final int PLACE_PICKER_REQUEST = 15;
     private final int PERMISSION_ALL = 1;
-
+    private boolean pay;
+    public static Context addressContext;
 
 
     @Override
@@ -45,8 +46,9 @@ public class AddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         add_btn = findViewById(R.id.address_btn);
+        addressContext = getApplicationContext();
         skip = findViewById(R.id.skip);
-
+        pay = getIntent().getBooleanExtra("pay",false);
         String[] PERMISSIONS = {
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -84,7 +86,7 @@ public class AddressActivity extends AppCompatActivity {
 //                    } catch (Exception e) {
 //                        Toast.makeText(AddressActivity.this, "" + e, Toast.LENGTH_SHORT).show();
 //                    }
-                    startActivity(new Intent(AddressActivity.this,MapsActivity.class));
+                    startActivity(new Intent(AddressActivity.this,MapsActivity.class).putExtra("pay",pay));
                 }
 
 
@@ -170,4 +172,6 @@ public class AddressActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

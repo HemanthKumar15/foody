@@ -68,6 +68,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Intent go = new Intent(MapsActivity.this, SaveAddressActivity.class);
                     go.putExtra("address",address);
                     go.putExtra("pin",postalCode);
+                    go.putExtra("pay",getIntent().getBooleanExtra("pay",false));
+                    String AddressContext = getIntent().getStringExtra("this");
+                    go.putExtra("this",AddressContext);
                     startActivity(go);
                     finish();
                 } catch (IOException e) {

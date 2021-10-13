@@ -3,6 +3,7 @@ package thulasi.hemanthkumar.foody;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -83,9 +84,16 @@ public class SaveAddressActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     loader.setVisibility(View.INVISIBLE);
                                     if (task.isSuccessful()){
-                                        Intent go = new Intent(SaveAddressActivity.this,MainActivity.class);
-                                        startActivity(go);
-                                        finish();
+                                        if(getIntent().getBooleanExtra("pay", false)){
+
+                                            finish();
+                                        }
+                                        else {
+                                            Intent go = new Intent(SaveAddressActivity.this, MainActivity.class);
+
+                                            startActivity(go);
+                                            finish();
+                                        }
                                     }
                                 }
                             });
