@@ -82,9 +82,9 @@ public class SaveAddressActivity extends AppCompatActivity {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    loader.setVisibility(View.INVISIBLE);
+
                                     if (task.isSuccessful()){
-                                        if(getIntent().getBooleanExtra("pay", false)){
+                                        if (getIntent().getBooleanExtra("pay", false)){
 
                                             finish();
                                         }

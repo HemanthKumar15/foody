@@ -45,6 +45,7 @@ public class NotificationsFragment extends Fragment {
     private ArrayAdapter<String> arrayAdapter;
     private Integer amount;
     public static TextView tamount;
+    public static Integer cart_amount = 0;
     private Button proceed;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -91,8 +92,13 @@ public class NotificationsFragment extends Fragment {
                             }
                             UpdateAmount(getContext());
 
+                            SharedPreferences pref = getActivity().getSharedPreferences("save",Context.MODE_PRIVATE);
+
+
                             cartAdapter = new Cart(getContext(),NotificationsFragment.this,cartitems);
                             cartView.setAdapter(cartAdapter);
+
+
 
 
 
@@ -119,7 +125,16 @@ public class NotificationsFragment extends Fragment {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckData();
+                if (cart_amount > 100 || cart_amount == 100) {
+                    CheckData();
+
+                }
+                else if (cart_amount <100 && cart_amount>0){
+                    Toast.makeText(getContext(), "Minimum value for order is ₹: 100", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getContext(), "Your cart is empty", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -143,6 +158,7 @@ public class NotificationsFragment extends Fragment {
             amount = amount + Integer.valueOf(cart.getTotal());
         }
         tamount.setText("₹ "+amount);
+        cart_amount = amount;
 
 
     }
@@ -164,4 +180,19 @@ public class NotificationsFragment extends Fragment {
         getFragmentManager().beginTransaction().attach(NotificationsFragment.this).commit();
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        getFragmentManager().beginTransaction().detach(NotificationsFragment.this).commit();
+//        getFragmentManager().beginTransaction().attach(NotificationsFragment.this).commit();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+
+    }
+
 }

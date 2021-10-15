@@ -80,6 +80,7 @@ public class CartHandler extends SQLiteOpenHelper {
                 cartList.add(cart);
                 Log.d("db", "getCart: "+cart.getId());
             }while (cursor.moveToNext());
+            cursor.close();
         }
 
         return cartList;
@@ -105,4 +106,5 @@ public class CartHandler extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)});
         db.close();
     }
+
 }
