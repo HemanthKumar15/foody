@@ -28,6 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PaymentActivity"
+            android:exported="true" />
+        <activity
             android:name=".ChooseAddressActivity"
             android:exported="true" />
 
@@ -40,7 +43,7 @@
 
         <activity
             android:name=".MapsActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -56,9 +59,7 @@
         <activity
             android:name=".SaveAddressActivity"
             android:exported="true" />
-        <activity android:name=".AddressActivity">
-
-        </activity>
+        <activity android:name=".AddressActivity"></activity>
         <activity android:name=".VerificationActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".SplashActivity">
