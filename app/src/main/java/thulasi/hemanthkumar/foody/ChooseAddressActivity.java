@@ -151,6 +151,7 @@ public class ChooseAddressActivity extends AppCompatActivity {
                     go.putExtra("place", selection);
                     go.putExtra("amount", amount);
                     startActivity(go);
+                    finish();
                 }
             }
         });

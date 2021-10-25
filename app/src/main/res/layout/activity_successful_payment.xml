@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SuccessfulPaymentActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_ok"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="paymentsuccessful.json"
+        app:lottie_loop="false" />
+
+    <Button
+        android:id="@+id/got"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_btn"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableLeft="@drawable/ic_done_24"
+        android:fontFamily="@font/baloo_thambi"
+        android:text="GOT IT"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/animation_ok"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/payid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/baloo_thambi"
+        android:text="PAYMENT SUCCESSFUL \n Your Transaction ID :"
+        android:textAlignment="center"
+        android:textColor="#4CAF50"
+        app:layout_constraintBottom_toTopOf="@+id/got"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

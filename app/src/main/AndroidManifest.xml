@@ -28,6 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SuccessfulPaymentActivity"
+            android:exported="true" />
+        <activity
             android:name=".PaymentActivity"
             android:exported="true" />
         <activity
@@ -59,7 +62,7 @@
         <activity
             android:name=".SaveAddressActivity"
             android:exported="true" />
-        <activity android:name=".AddressActivity"></activity>
+        <activity android:name=".AddressActivity" />
         <activity android:name=".VerificationActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".SplashActivity">
