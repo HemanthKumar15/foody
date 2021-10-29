@@ -12,6 +12,8 @@ public class sqlite {
     public static final String CART_QTY = "qty";
     public static final String CART_TOTAL = "total";
     public static final String CART_PRICE = "price";
+    public static int ORDER_INDEX = 1;
+
 
 
 }

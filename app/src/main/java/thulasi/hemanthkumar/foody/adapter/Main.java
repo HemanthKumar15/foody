@@ -23,6 +23,7 @@ import thulasi.hemanthkumar.foody.MainActivity;
 import thulasi.hemanthkumar.foody.R;
 import thulasi.hemanthkumar.foody.data.CartHandler;
 import thulasi.hemanthkumar.foody.model.Cart;
+import thulasi.hemanthkumar.foody.model.Order;
 
 public class Main extends FirebaseRecyclerAdapter<thulasi.hemanthkumar.foody.model.Main, Main.MainViewHolder> {
     /**
@@ -36,6 +37,8 @@ public class Main extends FirebaseRecyclerAdapter<thulasi.hemanthkumar.foody.mod
         super(options);
         Mcontext = context;
     }
+
+
 
     @Override
     protected void onBindViewHolder(@NonNull MainViewHolder holder, int i, @NonNull thulasi.hemanthkumar.foody.model.Main model) {

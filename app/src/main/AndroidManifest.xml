@@ -28,6 +28,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".OrderProductsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".OrderDetailsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".SuccessfulPaymentActivity"
             android:exported="true" />
         <activity
@@ -65,13 +77,7 @@
         <activity android:name=".AddressActivity" />
         <activity android:name=".VerificationActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".SplashActivity"></activity>
     </application>
 
 </manifest>

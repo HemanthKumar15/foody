@@ -29,6 +29,8 @@
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/activity_choose_address.xml" value="0.32914572864321606" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/activity_maps.xml" value="0.3464052287581699" />
+        <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/activity_order_details.xml" value="0.3887147335423197" />
+        <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/activity_order_products.xml" value="0.16458333333333333" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/activity_payment.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/activity_registration.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/activity_save_address.xml" value="0.5" />
@@ -39,9 +41,11 @@
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/fragment_map.xml" value="0.165625" />
-        <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/fragment_notifications.xml" value="0.5" />
+        <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/fragment_notifications.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/fragment_profile.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/main_card.xml" value="0.39814814814814814" />
+        <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/order_card.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/order_product_card.xml" value="0.67" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/layout/sec_card.xml" value="0.5" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/menu/bottom_nav_menu.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudioProjects/Foody/app/src/main/res/menu/menu.xml" value="0.14375" />

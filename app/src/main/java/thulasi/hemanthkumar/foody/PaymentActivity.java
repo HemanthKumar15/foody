@@ -29,6 +29,7 @@ import java.util.List;
 
 import thulasi.hemanthkumar.foody.data.CartHandler;
 import thulasi.hemanthkumar.foody.model.Cart;
+import thulasi.hemanthkumar.foody.ui.notifications.NotificationsFragment;
 
 public class PaymentActivity extends AppCompatActivity implements PaymentResultListener {
 
@@ -39,6 +40,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     private MKLoader loader;
     private String ProductId;
     private DatabaseReference child;
+    private String currentTime;
+    private String currentDate;
+    private boolean card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             public void onClick(View v) {
                 runloader();
                 sendData(child);
+
+                NotificationsFragment.RefreshCart(NotificationsFragment.notificationsFragmentStatic);
+                finish();
             }
         });
         onlinecard.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +92,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                     object.put("prefill.contact",getSharedPreferences("save",MODE_PRIVATE).getString("num","0"));
 
 
-                    checkout.open(PaymentActivity.this,object);
+
+                    checkout.open(PaymentActivity.this, object);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -103,8 +112,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         Calendar calender = Calendar.getInstance();
         SimpleDateFormat DateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
         SimpleDateFormat TimeFormatter = new SimpleDateFormat("HH:mm:ss");
-        String currentDate = DateFormatter.format(calender.getTime());
-        String currentTime = TimeFormatter.format(calender.getTime());
+        currentDate = DateFormatter.format(calender.getTime());
+        currentTime = TimeFormatter.format(calender.getTime());
         ProductId = currentDate+currentTime;
         for (thulasi.hemanthkumar.foody.model.Cart cart: items) {
 
@@ -116,7 +125,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             map.put("qty",cart.getQty());
             map.put("img",cart.getImg());
 
-            child.child(ProductId).child(cart.getId()).child(ProductId).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            child.child(ProductId).child(cart.getId()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
@@ -124,6 +133,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
 
                     }
 
@@ -146,13 +156,17 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         HashMap<String,Object> map = new HashMap<>();
 
         map.put("num",Cnum);
+        map.put("id",ProductId);
         map.put("name",Cname);
+        map.put("date",currentDate);
+        map.put("time",currentTime);
         map.put("place",getIntent().getStringExtra("place"));
-        map.put("Total",amount);
+        map.put("total",amount);
         map.put("payid",s);
-        map.put("payMethod","Online paid");
+        map.put("status","Preparing...");
+        map.put("paymethod","Online paid");
 
-        FirebaseDatabase.getInstance().getReference().child("orderdetails").child(Cnum)
+        FirebaseDatabase.getInstance().getReference().child("orderdetails").child(Cnum).child(ProductId)
                 .setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -165,7 +179,11 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     private void runAlert(String s) {
 
-
+        CartHandler db = new CartHandler(this);
+        List<thulasi.hemanthkumar.foody.model.Cart> cartList = db.getCart();
+        for (thulasi.hemanthkumar.foody.model.Cart cart: cartList) {
+            db.deleteCartItem(cart.getId());
+        }
         Intent go = new Intent(PaymentActivity.this,SuccessfulPaymentActivity.class);
         go.putExtra("id",s);
         startActivity(go);
@@ -186,7 +204,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                         }
                     }
                 });
-        Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Something went wrong:)", Toast.LENGTH_SHORT).show();
 
     }
 }

@@ -63,6 +63,7 @@ public class CartHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE "+sqlite.TABLE_NAME);
         Log.d("db","DROPPED: "+sqlite.TABLE_NAME);
+
     }
 
     public List<Cart> getCart(){
@@ -104,6 +105,18 @@ public class CartHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(sqlite.TABLE_NAME,sqlite.CART_ID + "=?",
                 new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public int getCount(){
+        String query = "SELECT * FROM "+sqlite.TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        return cursor.getCount();
+    }
+    public void deleteCartItem(String Cid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(sqlite.TABLE_NAME,sqlite.CART_ID+"=?",new String[]{String.valueOf(Cid)});
         db.close();
     }
 

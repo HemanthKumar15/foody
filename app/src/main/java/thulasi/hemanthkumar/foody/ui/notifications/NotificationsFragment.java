@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tuyenmonkey.mkloader.MKLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +37,13 @@ import thulasi.hemanthkumar.foody.ChooseAddressActivity;
 import thulasi.hemanthkumar.foody.adapter.Cart;
 import thulasi.hemanthkumar.foody.data.CartHandler;
 import thulasi.hemanthkumar.foody.databinding.FragmentNotificationsBinding;
+import thulasi.hemanthkumar.foody.ui.home.HomeFragment;
 
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
     public FragmentNotificationsBinding binding;
+    public static NotificationsFragment notificationsFragmentStatic;
     private RecyclerView cartView;
     private Cart cartAdapter;
     private ArrayList<thulasi.hemanthkumar.foody.model.Cart> cartitems;
@@ -47,21 +52,33 @@ public class NotificationsFragment extends Fragment {
     public static TextView tamount;
     public static Integer cart_amount = 0;
     private Button proceed;
+    private LottieAnimationView EmptyAnimation;
+    private TextView EmptyTxt;
+    private MKLoader loader;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         proceed = binding.proceed;
+        notificationsFragmentStatic = this;
 
         final TextView textView = binding.textNotifications;
         cartView = binding.cartrecycler;
         cartView.setHasFixedSize(true);
         cartView.setLayoutManager(new LinearLayoutManager(getContext()));
         tamount = binding.tamount;
+        EmptyTxt = binding.emptyTxt;
+        EmptyAnimation = binding.animationEmpty;
+        loader = binding.loader;
+
+
+
+
         amount = 0;
         cartitems = new ArrayList<>();
         CartHandler db = new CartHandler(getContext());
@@ -69,48 +86,58 @@ public class NotificationsFragment extends Fragment {
         List<thulasi.hemanthkumar.foody.model.Cart> cartList = db.getCart();
 
 
-        FirebaseDatabase.getInstance().getReference().addValueEventListener(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            for (thulasi.hemanthkumar.foody.model.Cart cart: cartList) {
-                                thulasi.hemanthkumar.foody.model.Cart items = new thulasi.hemanthkumar.foody.model.Cart();
-                                String pc_name = snapshot.child(cart.getChild()).child(cart.getId().toString()).child("name").getValue().toString();
-                                String pc_img = snapshot.child(cart.getChild()).child(cart.getId().toString()).child("image").getValue().toString();
-                                items.setName(pc_name);
-                                items.setImg(pc_img);
-                                items.setId(cart.getId().toString());
-                                items.setQty(cart.getQty().toString());
-                                items.setPrice(cart.getPrice().toString());
-                                items.setTotal(cart.getTotal().toString());
-                                items.setChild(cart.getChild().toString());
+        if (db.getCount() > 0) {
 
-                                cartitems.add(items);
+            EmptyTxt.setVisibility(View.GONE);
+            EmptyAnimation.setVisibility(View.GONE);
+            cartView.setVisibility(View.VISIBLE);
+            FirebaseDatabase.getInstance().getReference().addValueEventListener(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                for (thulasi.hemanthkumar.foody.model.Cart cart : cartList) {
+                                    thulasi.hemanthkumar.foody.model.Cart items = new thulasi.hemanthkumar.foody.model.Cart();
+                                    String pc_name = snapshot.child(cart.getChild()).child(cart.getId().toString()).child("name").getValue().toString();
+                                    String pc_img = snapshot.child(cart.getChild()).child(cart.getId().toString()).child("image").getValue().toString();
+                                    items.setName(pc_name);
+                                    items.setImg(pc_img);
+                                    items.setId(cart.getId().toString());
+                                    items.setQty(cart.getQty().toString());
+                                    items.setPrice(cart.getPrice().toString());
+                                    items.setTotal(cart.getTotal().toString());
+                                    items.setChild(cart.getChild().toString());
+
+                                    cartitems.add(items);
+
+
+                                }
+                                UpdateAmount(getContext());
+
+                                SharedPreferences pref = getActivity().getSharedPreferences("save", Context.MODE_PRIVATE);
+
+
+                                cartAdapter = new Cart(getContext(), NotificationsFragment.this, cartitems);
+                                loader.setVisibility(View.INVISIBLE);
+                                cartView.setAdapter(cartAdapter);
 
 
                             }
-                            UpdateAmount(getContext());
+                        }
 
-                            SharedPreferences pref = getActivity().getSharedPreferences("save",Context.MODE_PRIVATE);
-
-
-                            cartAdapter = new Cart(getContext(),NotificationsFragment.this,cartitems);
-                            cartView.setAdapter(cartAdapter);
-
-
-
-
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                }
             );
+        }
+        else{
+            cartView.setVisibility(View.INVISIBLE);
+            loader.setVisibility(View.INVISIBLE);
+            EmptyAnimation.setVisibility(View.VISIBLE);
+            EmptyTxt.setVisibility(View.VISIBLE);
+        }
 
 
 
@@ -146,6 +173,7 @@ public class NotificationsFragment extends Fragment {
         SharedPreferences pref = getActivity().getSharedPreferences("save",Context.MODE_PRIVATE);
         Intent go = new Intent(getContext(),ChooseAddressActivity.class);
         go.putExtra("amount",amount);
+
         startActivity(go);
 
     }
@@ -181,11 +209,14 @@ public class NotificationsFragment extends Fragment {
 
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
 //        getFragmentManager().beginTransaction().detach(NotificationsFragment.this).commit();
 //        getFragmentManager().beginTransaction().attach(NotificationsFragment.this).commit();
+
     }
 
     @Override
@@ -193,6 +224,8 @@ public class NotificationsFragment extends Fragment {
         super.onPause();
 
 
+
     }
+
 
 }
