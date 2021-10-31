@@ -1,5 +1,6 @@
 package thulasi.hemanthkumar.foody;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,13 +9,19 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegistrationActivity extends AppCompatActivity {
 
 	private EditText name,phone;
+	private TextView title;
 	private FloatingActionButton next;
 
 	@Override
@@ -24,6 +31,26 @@ public class RegistrationActivity extends AppCompatActivity {
 		name = findViewById(R.id.name);
 		phone = findViewById(R.id.phone);
 		next = findViewById(R.id.next);
+		title = findViewById(R.id.titlechange);
+		if(getIntent().getBooleanExtra("change",false)){
+			title.setText("Edit profile");
+			phone.setText(getSharedPreferences("save",MODE_PRIVATE).getString("num","0").substring(3));
+			FirebaseDatabase.getInstance().getReference().child("users")
+					.child(getSharedPreferences("save",MODE_PRIVATE).getString("num","non user"))
+					.addValueEventListener(new ValueEventListener() {
+						@Override
+						public void onDataChange(@NonNull DataSnapshot snapshot) {
+							if(snapshot.exists()){
+								name.setText(snapshot.child("name").getValue().toString());
+							}
+						}
+
+						@Override
+						public void onCancelled(@NonNull DatabaseError error) {
+
+						}
+					});
+		}
 
 		next.setOnClickListener(new View.OnClickListener() {
 			@Override

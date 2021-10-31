@@ -66,8 +66,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             public void onClick(View v) {
                 runloader();
                 sendData(child);
+                startActivity(new Intent(PaymentActivity.this,OrderDetailsActivity.class));
 
-                NotificationsFragment.RefreshCart(NotificationsFragment.notificationsFragmentStatic);
                 finish();
             }
         });
@@ -76,16 +76,15 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             public void onClick(View v) {
 
                 runloader();
-                sendData(FirebaseDatabase.getInstance().getReference().child("orders")
-                        .child(getSharedPreferences("save",MODE_PRIVATE).getString("num","0")));
+
                 Checkout checkout = new Checkout();
                 checkout.setKeyID("rzp_test_OPNTnwAh6MYbR5");
                 checkout.setImage(R.drawable.foody);
                 // JSON Object
                 JSONObject object = new JSONObject();
                 try {
-                    object.put("name","Hemanth Kumar");
-                    object.put("description","Sending test money");
+                    object.put("name","Foody");
+
                     object.put("theme.color","#FF5722");
                     object.put("currency","INR");
                     object.put("amount",Math.round(Float.parseFloat(amount.toString())*100));
@@ -121,9 +120,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
             map.put("id",cart.getId());
             map.put("name",cart.getName());
-            map.put("price",cart.getPrice());
+            map.put("price",cart.getPrice().toString());
             map.put("qty",cart.getQty());
             map.put("img",cart.getImg());
+
 
             child.child(ProductId).child(cart.getId()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -161,10 +161,13 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         map.put("date",currentDate);
         map.put("time",currentTime);
         map.put("place",getIntent().getStringExtra("place"));
-        map.put("total",amount);
+        map.put("total",amount.toString());
         map.put("payid",s);
         map.put("status","Preparing...");
         map.put("paymethod","Online paid");
+
+        sendData(FirebaseDatabase.getInstance().getReference().child("orders")
+                .child(getSharedPreferences("save",MODE_PRIVATE).getString("num","0")));
 
         FirebaseDatabase.getInstance().getReference().child("orderdetails").child(Cnum).child(ProductId)
                 .setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {

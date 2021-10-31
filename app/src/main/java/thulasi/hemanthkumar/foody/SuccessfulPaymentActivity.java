@@ -2,6 +2,7 @@ package thulasi.hemanthkumar.foody;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,8 @@ public class SuccessfulPaymentActivity extends AppCompatActivity {
         finishIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NotificationsFragment.RefreshCart(NotificationsFragment.notificationsFragmentStatic);
+                startActivity(new Intent(SuccessfulPaymentActivity.this,OrderDetailsActivity.class));
+
                 finish();
             }
         });

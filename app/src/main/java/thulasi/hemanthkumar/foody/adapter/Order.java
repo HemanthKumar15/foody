@@ -24,6 +24,7 @@ import thulasi.hemanthkumar.foody.MapsActivity;
 import thulasi.hemanthkumar.foody.OrderDetailsActivity;
 import thulasi.hemanthkumar.foody.OrderProductsActivity;
 import thulasi.hemanthkumar.foody.R;
+import thulasi.hemanthkumar.foody.model.Cart;
 import thulasi.hemanthkumar.foody.params.sqlite;
 
 public class Order extends FirebaseRecyclerAdapter<thulasi.hemanthkumar.foody.model.Order, Order.OrderViewHolder> {
@@ -40,6 +41,8 @@ public class Order extends FirebaseRecyclerAdapter<thulasi.hemanthkumar.foody.mo
         super(options);
         this.context = context;
     }
+
+
 
     @Override
     protected void onBindViewHolder(@NonNull OrderViewHolder holder, int position, @NonNull thulasi.hemanthkumar.foody.model.Order model) {

@@ -10,6 +10,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import thulasi.hemanthkumar.foody.model.Cart;
 import thulasi.hemanthkumar.foody.model.Main;
 import thulasi.hemanthkumar.foody.model.Order;
 

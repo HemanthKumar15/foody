@@ -7,7 +7,7 @@
     tools:context=".ChooseAddressActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/title_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toTopOf="@+id/next_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/title_txt">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,6 +69,15 @@
                     android:text="Address"
                     android:textSize="16sp" />
 
+                <ImageButton
+                    android:id="@+id/homecancel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="#FFFFFF"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/places_ic_clear" />
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -106,6 +115,16 @@
                     android:layout_marginTop="35dp"
                     android:text="Address"
                     android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/workcancel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="#FFFFFF"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/places_ic_clear" />
+
 
             </androidx.cardview.widget.CardView>
 
@@ -145,6 +164,16 @@
                     android:text="Address"
                     android:textSize="16sp" />
 
+                <ImageButton
+                    android:id="@+id/othercancel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="#FFFFFF"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/places_ic_clear" />
+
+
             </androidx.cardview.widget.CardView>
 
             <Button
@@ -179,5 +208,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

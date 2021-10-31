@@ -33,11 +33,7 @@
         <activity
             android:name=".OrderDetailsActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SuccessfulPaymentActivity"
@@ -77,7 +73,13 @@
         <activity android:name=".AddressActivity" />
         <activity android:name=".VerificationActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package thulasi.hemanthkumar.foody;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -8,18 +9,23 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +41,7 @@ public class ChooseAddressActivity extends AppCompatActivity {
 
     private CardView home_cv,work_cv,other_cv;
     private ImageView home_img,work_img, other_img;
+    private ImageButton homecancel_btn,workcancel_btn,othercancel_btn;
     private TextView home_txt,home_address;
     private TextView work_txt,work_address;
     private TextView other_txt,other_address;
@@ -56,12 +63,23 @@ public class ChooseAddressActivity extends AppCompatActivity {
 
         addaddress = findViewById(R.id.add_btn);
         next = findViewById(R.id.next_btn);
+        homecancel_btn = findViewById(R.id.homecancel_btn);
+        workcancel_btn = findViewById(R.id.workcancel_btn);
+        othercancel_btn = findViewById(R.id.othercancel_btn);
 
         String[] PERMISSIONS = {
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
 
         };
+        if (getIntent().getIntExtra("amount",0) == -1){
+            next.setVisibility(View.GONE);
+            TextView title = findViewById(R.id.title_txt);
+            title.setText("Add/Change Address");
+            homecancel_btn.setVisibility(View.VISIBLE);
+            workcancel_btn.setVisibility(View.VISIBLE);
+            othercancel_btn.setVisibility(View.VISIBLE);
+        }
 
         home_img = findViewById(R.id.home_img_rd);
         work_img = findViewById(R.id.work_img_rd);
@@ -155,6 +173,94 @@ public class ChooseAddressActivity extends AppCompatActivity {
                 }
             }
         });
+        homecancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(ChooseAddressActivity.this)
+                        .setTitle("Delete Address?")
+                        .setMessage("Do you want to delete this address")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DeleteAddress("home",home_cv);
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int a = 1;
+                                Log.d("TAG", "onClick: "+a);
+                            }
+                        })
+                        .show();
+
+
+            }
+
+        });
+        workcancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(ChooseAddressActivity.this)
+                        .setTitle("Delete Address?")
+                        .setMessage("Do you want to delete this address")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DeleteAddress("work",work_cv);
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int a = 1;
+                                Log.d("TAG", "onClick: "+a);
+                            }
+                        })
+                        .show();
+
+
+            }
+
+        });
+        othercancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(ChooseAddressActivity.this)
+                        .setTitle("Delete Address?")
+                        .setMessage("Do you want to delete this address")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DeleteAddress("other",other_cv);
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int a = 1;
+                                Log.d("TAG", "onClick: "+a);
+                            }
+                        })
+                        .show();
+
+
+            }
+
+        });
+
+
+
+    }
+
+    private void DeleteAddress(String place, CardView cancel_cv) {
+        FirebaseDatabase.getInstance().getReference().child("address")
+                .child(getSharedPreferences("save", MODE_PRIVATE).getString("num", "non_user"))
+                .child(place).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                   cancel_cv.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
 
@@ -163,18 +269,20 @@ public class ChooseAddressActivity extends AppCompatActivity {
         work_img.setImageResource(R.drawable.ic_apartment_bk);
         other_img.setImageResource(R.drawable.ic_location_bk);
 
-        home_txt.setTextColor(Color.BLACK);
-        work_txt.setTextColor(Color.BLACK);
-        other_txt.setTextColor(Color.BLACK);
+        if(getIntent().getIntExtra("amount",0) != -1) {
+            home_txt.setTextColor(Color.BLACK);
+            work_txt.setTextColor(Color.BLACK);
+            other_txt.setTextColor(Color.BLACK);
 
-        home_cv.setBackgroundResource(R.drawable.input_text_default);
-        work_cv.setBackgroundResource(R.drawable.input_text_default);
-        other_cv.setBackgroundResource(R.drawable.input_text_default);
+            home_cv.setBackgroundResource(R.drawable.input_text_default);
+            work_cv.setBackgroundResource(R.drawable.input_text_default);
+            other_cv.setBackgroundResource(R.drawable.input_text_default);
 
 
-        img.setImageResource(i);
-        txt.setTextColor(Color.parseColor("#FF5722"));
-        cv.setBackgroundResource(R.drawable.input_text_or);
+            img.setImageResource(i);
+            txt.setTextColor(Color.parseColor("#FF5722"));
+            cv.setBackgroundResource(R.drawable.input_text_or);
+        }
 
 
     }
