@@ -1,5 +1,6 @@
 package thulasi.hemanthkumar.foody.ui.home;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,6 +21,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import thulasi.hemanthkumar.foody.CategoryActivity;
 import thulasi.hemanthkumar.foody.MainActivity;
 import thulasi.hemanthkumar.foody.R;
 import thulasi.hemanthkumar.foody.adapter.Secondary;
@@ -32,6 +35,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     private RecyclerView recycler,secview;
+    private ConstraintLayout starter,special,south,nonveg,north,drinks,desert,more;
 
     private DatabaseReference ProRef;
     private thulasi.hemanthkumar.foody.adapter.Main adapter;
@@ -48,6 +52,71 @@ public class HomeFragment extends Fragment {
         final TextView textView = binding.textHome;
         recycler = binding.main;
         secview = binding.secview;
+        starter = binding.starters;
+        special = binding.special;
+        south = binding.south;
+        nonveg = binding.nonveg;
+        north = binding.north;
+        drinks = binding.drinks;
+        desert = binding.desert;
+        more = binding.more;
+
+
+        starter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCategory("Starter");
+            }
+        });
+
+        special.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCategory("Today's Special");
+            }
+        });
+
+        south.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCategory("South Indian");
+            }
+        });
+
+        nonveg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCategory("Non-veg");
+            }
+        });
+
+        north.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCategory("North Indian");
+            }
+        });
+
+        drinks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCategory("Drinks");
+            }
+        });
+
+        desert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCategory("Desert");
+            }
+        });
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goCategory("More");
+            }
+        });
 
         ProRef = FirebaseDatabase.getInstance().getReference().child("Products");
         secview.setHasFixedSize(true);
@@ -80,6 +149,12 @@ public class HomeFragment extends Fragment {
         });
         return root;
 
+    }
+
+    private void goCategory(String category) {
+        Intent go = new Intent(getContext(), CategoryActivity.class);
+        go.putExtra("category",category);
+        startActivity(go);
     }
 
     @Override

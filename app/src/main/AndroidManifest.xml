@@ -28,13 +28,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".CategoryActivity"
+            android:exported="true" />
+        <activity
             android:name=".OrderProductsActivity"
             android:exported="true" />
         <activity
             android:name=".OrderDetailsActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".SuccessfulPaymentActivity"
             android:exported="true" />

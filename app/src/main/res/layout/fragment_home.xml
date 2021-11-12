@@ -136,7 +136,7 @@
                         android:padding="5dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/bakery"
+                            android:id="@+id/starters"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingRight="5dp">
@@ -145,17 +145,18 @@
                                 android:id="@+id/bkt"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
-                                android:src="@drawable/bakery"
+
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/starter" />
 
                             <TextView
                                 android:id="@+id/bki"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/baloo_thambi"
-                                android:text="Bakery"
+                                android:text="Starters"
                                 android:textAlignment="center"
                                 android:textColor="#000000"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -166,7 +167,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/cupcake"
+                            android:id="@+id/special"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingRight="5dp">
@@ -175,7 +176,7 @@
                                 android:id="@+id/cci"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
-                                android:src="@drawable/cupcake"
+                                android:src="@drawable/todays_special"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -185,7 +186,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/baloo_thambi"
-                                android:text="Cupcake"
+                                android:text="Today's special"
                                 android:textAlignment="center"
                                 android:textColor="#000000"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -195,37 +196,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/drinks"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingRight="5dp">
-
-                            <ImageView
-                                android:id="@+id/di"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:src="@drawable/drinks"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/dt"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/baloo_thambi"
-                                android:text="Drinks"
-                                android:textAlignment="center"
-                                android:textColor="#000000"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/di" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/hamburger"
+                            android:id="@+id/south"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingRight="5dp">
@@ -234,83 +205,24 @@
                                 android:id="@+id/hbi"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
-                                android:src="@drawable/hamburger"
+
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/dosa" />
 
                             <TextView
                                 android:id="@+id/hbt"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/baloo_thambi"
-                                android:text="Hamburger"
+                                android:text="South specials"
                                 android:textAlignment="center"
                                 android:textColor="#000000"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/hbi" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/heathy"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingRight="5dp">
-
-                            <ImageView
-                                android:id="@+id/hi"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:src="@drawable/healthy"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/ht"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/baloo_thambi"
-                                android:text="Healthy"
-                                android:textAlignment="center"
-                                android:textColor="#000000"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/hi" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/icecream"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingRight="5dp">
-
-                            <ImageView
-                                android:id="@+id/ici"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:src="@drawable/icecream"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/ict"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/baloo_thambi"
-                                android:text="Ice cream"
-                                android:textAlignment="center"
-                                android:textColor="#000000"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/ici" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -345,7 +257,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/northindian"
+                            android:id="@+id/north"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingRight="5dp">
@@ -375,32 +287,63 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/teacoffee"
+                            android:id="@+id/drinks"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingRight="5dp">
 
                             <ImageView
-                                android:id="@+id/tci"
+                                android:id="@+id/di"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
-                                android:src="@drawable/teacoffee"
+                                android:src="@drawable/drinks"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/tct"
+                                android:id="@+id/dt"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/baloo_thambi"
-                                android:text="Tea and coffee"
+                                android:text="Drinks"
+                                android:textAlignment="center"
                                 android:textColor="#000000"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/tci"
-                                android:textAlignment="center" />
+                                app:layout_constraintTop_toBottomOf="@+id/di" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/desert"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingRight="5dp">
+
+                            <ImageView
+                                android:id="@+id/ici"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/desert" />
+
+                            <TextView
+                                android:id="@+id/ict"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/baloo_thambi"
+                                android:text="Deserts"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/ici" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
